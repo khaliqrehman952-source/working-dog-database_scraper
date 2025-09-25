@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Working-Dog Scraper — Control Panel</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f9;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 12px;
+      color: #333;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 18px;
+      margin: 12px auto;
+      max-width: 720px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    label {
+      display: block;
+      margin-top: 8px;
+      color: #444;
+      font-weight: 600;
+    }
+
+    input[type=text],
+    input[type=number] {
+      width: 100%;
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: none;
+      background: #007bff;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    button[disabled] {
+      background: #9bbcf7;
+      cursor: not-allowed;
+    }
+
+    pre {
+      background: #111;
+      color: #eee;
+      padding: 12px;
+      border-radius: 6px;
+      max-height: 300px;
+      overflow: auto;
+    }
+
+    .muted {
+      color: #666;
+      font-size: 0.9em;
+    }
+
+    .row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .col {
+      flex: 1;
+    }
+
+    .small {
+      padding: 6px 10px;
+      font-size: 14px;
+      border-radius: 6px;
+      margin-right: 8px;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>🐶 Working-Dog Scraper — Control Panel</h2>
+
+  <div class="card">
+    <h3>1) Start Search Scrape</h3>
+    <p class="muted">Dog Name will be entered into the site's search form automatically. Optionally provide a Resume
+      name to resume scraping from that result (leave blank to start from first).</p>
+
+    <label>Dog Name (for website form):</label>
+    <input id="dog_name" type="text" placeholder="Enter Dog Name to Search">
+
+    <label>Resume from (optional):</label>
+    <input id="resume_from" type="text" placeholder="Dog name to resume from or leave empty">
+
+    <button id="start_search">Start Search Scrape</button>
+  </div>
+
+  <div class="card">
+    <h3>2) Re-scrape Range</h3>
+    <div class="row">
+      <div class="col">
+        <label>Start index (1-based):</label>
+        <input id="res_start" type="number" min="1" value="1">
+      </div>
+      <div class="col">
+        <label>End index (1-based):</label>
+        <input id="res_end" type="number" min="1" value="10">
+      </div>
+    </div>
+    <button id="rescrape_range">Start Re-scrape Range</button>
+  </div>
+
+  <div class="card">
+    <h3>3) Scrape Single Profile</h3>
+    <label>Profile URL:</label>
+    <input id="single_url" type="text" placeholder="https://www.working-dog.com/dogs-details/12345">
+    <button id="scrape_single">Scrape Single</button>
+  </div>
+
+  <div class="card">
+    <h3>4) Maintenance</h3>
+    <button id="clean_files" class="small">Clean CSV/Excel/JSON</button>
+    <button id="stop_btn" style="background:#d9534f; margin-left:8px;" class="small">Stop / Quit Browser</button>
+
+    <div style="margin-top:12px;">
+      <button onclick="openFile('dogs_data.csv')" class="small">📄 Open CSV</button>
+      <button onclick="openFile('dogs_data.xlsx')" class="small">📊 Open Excel</button>
+      <button onclick="openFile('dogs_data.json')" class="small">🗂️ Open JSON</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Status & Log</h3>
+    <div>Running: <span id="running">false</span> — Last action: <span id="last_action">-</span></div>
+    <pre id="log_area">(Logs will appear here...)</pre>
+  </div>
+
+  <script>
+    async function postJson(path, body) {
+      const res = await fetch(path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body || {}) });
+      return res.json();
+    }
+    async function getJson(path) { const res = await fetch(path); return res.json(); }
+    function setRunningState(isRunning) {
+      document.getElementById('start_search').disabled = isRunning;
+      document.getElementById('rescrape_range').disabled = isRunning;
+      document.getElementById('scrape_single').disabled = isRunning;
+      document.getElementById('clean_files').disabled = isRunning;
+    }
+
+    document.getElementById('start_search').addEventListener('click', async () => {
+      const dogName = document.getElementById('dog_name').value.trim();
+      const resume = document.getElementById('resume_from').value.trim();
+      const r = await postJson('/api/start_search', { dog_name: dogName, resume_from: resume });
+      alert(r.msg || (r.ok ? 'Started' : 'Error'));
+    });
+
+    document.getElementById('rescrape_range').addEventListener('click', async () => {
+      const s = document.getElementById('res_start').value;
+      const e = document.getElementById('res_end').value;
+      const r = await postJson('/api/rescrape_range', { start: s, end: e });
+      alert(r.msg || (r.ok ? 'Started' : 'Error'));
+    });
+
+    document.getElementById('scrape_single').addEventListener('click', async () => {
+      const url = document.getElementById('single_url').value.trim();
+      const r = await postJson('/api/scrape_single', { url: url });
+      alert(r.msg || (r.ok ? 'Started' : 'Error'));
+    });
+
+    document.getElementById('clean_files').addEventListener('click', async () => {
+      const r = await postJson('/api/clean', {});
+      alert(r.msg || (r.ok ? 'Cleaning started' : 'Error'));
+    });
+
+    document.getElementById('stop_btn').addEventListener('click', async () => {
+      const r = await postJson('/api/stop', {});
+      alert(r.msg || (r.ok ? 'Stop requested' : 'Error'));
+    });
+
+    async function openFile(filename) {
+      const r = await postJson('/api/open_file', { file: filename });
+      alert(r.msg || (r.ok ? 'Opening file...' : 'Error'));
+    }
+
+    // Poll status and logs
+    async function poll() {
+      try {
+        const st = await getJson('/api/status');
+        document.getElementById('running').innerText = st.running;
+        document.getElementById('last_action').innerText = st.last_action || '-';
+        setRunningState(st.running);
+        const logs = await getJson('/api/logs');
+        const area = document.getElementById('log_area');
+        area.innerText = logs.join("\n");
+        area.scrollTop = area.scrollHeight;
+      } catch (e) {
+        console.error(e);
+      } finally {
+        setTimeout(poll, 2000);
+      }
+    }
+    poll();
+  </script>
+</body>
+
+</html>
