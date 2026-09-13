@@ -1,3 +1,51 @@
-2025/09/24-16:57:58.673 2740 Reusing MANIFEST C:\Users\hp 640\Desktop\working dog scraper comp\selenium_profiles\working_dog\Default\Local Storage\leveldb/MANIFEST-000001
-2025/09/24-16:57:58.694 2740 Recovering log #125
-2025/09/24-16:57:58.706 2740 Reusing old log C:\Users\hp 640\Desktop\working dog scraper comp\selenium_profiles\working_dog\Default\Local Storage\leveldb/000125.log 
+2026/08/04-14:50:59.765 33b4 Reusing MANIFEST C:\Users\hp 640\Desktop\working dog scraper comp\selenium_profiles\working_dog\Default\Local Storage\leveldb/MANIFEST-000001
+2026/08/04-14:50:59.799 33b4 Recovering log #485
+2026/08/04-14:50:59.812 33b4 Reusing old log C:\Users\hp 640\Desktop\working dog scraper comp\selenium_profiles\working_dog\Default\Local Storage\leveldb/000485.log 
+2026/08/04-14:53:53.839 439c Level-0 table #489: started
+2026/08/04-14:53:54.187 439c Level-0 table #489: 10526 bytes OK
+2026/08/04-14:53:54.203 439c Delete type=0 #485
+2026/08/04-14:56:14.778 439c Level-0 table #491: started
+2026/08/04-14:56:14.790 439c Level-0 table #491: 10354 bytes OK
+2026/08/04-14:56:14.796 439c Delete type=0 #488
+2026/08/04-15:03:14.773 439c Level-0 table #493: started
+2026/08/04-15:03:14.797 439c Level-0 table #493: 10610 bytes OK
+2026/08/04-15:03:14.805 439c Delete type=0 #490
+2026/08/04-15:03:14.806 439c Compacting 4@0 + 1@1 files
+2026/08/04-15:03:14.820 439c Generated table #494@0: 94 keys, 7308 bytes
+2026/08/04-15:03:14.820 439c Compacted 4@0 + 1@1 files => 7308 bytes
+2026/08/04-15:03:14.827 439c compacted to: files[ 0 1 1 0 0 0 0 ]
+2026/08/04-15:03:14.828 439c Delete type=2 #484
+2026/08/04-15:03:14.828 439c Delete type=2 #486
+2026/08/04-15:03:14.829 439c Delete type=2 #489
+2026/08/04-15:03:14.829 439c Delete type=2 #491
+2026/08/04-15:03:14.829 439c Delete type=2 #493
+2026/08/04-15:04:14.773 439c Level-0 table #496: started
+2026/08/04-15:04:14.789 439c Level-0 table #496: 10282 bytes OK
+2026/08/04-15:04:14.795 439c Delete type=0 #492
+2026/08/04-15:06:14.776 439c Level-0 table #498: started
+2026/08/04-15:06:14.790 439c Level-0 table #498: 10226 bytes OK
+2026/08/04-15:06:14.796 439c Delete type=0 #495
+2026/08/04-15:09:11.831 439c Level-0 table #500: started
+2026/08/04-15:09:11.986 439c Level-0 table #500: 10287 bytes OK
+2026/08/04-15:09:11.994 439c Delete type=0 #497
+2026/08/04-15:33:14.780 439c Level-0 table #502: started
+2026/08/04-15:33:14.793 439c Level-0 table #502: 13643 bytes OK
+2026/08/04-15:33:14.799 439c Delete type=0 #499
+2026/08/04-15:33:14.800 439c Compacting 4@0 + 1@1 files
+2026/08/04-15:33:14.816 439c Generated table #503@0: 96 keys, 7328 bytes
+2026/08/04-15:33:14.816 439c Compacted 4@0 + 1@1 files => 7328 bytes
+2026/08/04-15:33:14.821 439c compacted to: files[ 0 1 1 0 0 0 0 ]
+2026/08/04-15:33:14.822 439c Delete type=2 #494
+2026/08/04-15:33:14.822 439c Delete type=2 #496
+2026/08/04-15:33:14.822 439c Delete type=2 #498
+2026/08/04-15:33:14.823 439c Delete type=2 #500
+2026/08/04-15:33:14.823 439c Delete type=2 #502
+2026/08/04-15:39:14.769 439c Level-0 table #505: started
+2026/08/04-15:39:14.786 439c Level-0 table #505: 10517 bytes OK
+2026/08/04-15:39:14.792 439c Delete type=0 #501
+2026/08/04-15:41:23.200 439c Level-0 table #507: started
+2026/08/04-15:41:23.294 439c Level-0 table #507: 10288 bytes OK
+2026/08/04-15:41:23.305 439c Delete type=0 #504
+2026/08/04-15:47:14.767 439c Level-0 table #509: started
+2026/08/04-15:47:14.788 439c Level-0 table #509: 12058 bytes OK
+2026/08/04-15:47:14.794 439c Delete type=0 #506

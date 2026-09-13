@@ -205,3 +205,20 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# ============================================
+# Project-specific additions (scraper outputs)
+# ============================================
+
+# Selenium browser profiles (local session data - not portable, not needed in repo)
+selenium_profiles/
+
+# Scraped data outputs (large / regenerable by re-running the scrapers,
+# and may contain personal data about dog owners/breeders - keep out of a public repo)
+kennel_data/
+events_result_2019-2026/
+results_events_detail_2019-2026/
+German Shepherd (Events Dogs)/
+working_dog_data/
+working_dog_events/
+working_dog_events_detail/

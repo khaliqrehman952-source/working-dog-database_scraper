@@ -2,7 +2,7 @@
 from flask import Flask, request, jsonify, render_template
 import threading, collections, datetime, traceback, os, sys, subprocess
 
-# import your existing scraper module (save your big scraper as wr_dog_scraper.py)
+# import your existing scraper module
 import wr_dog_scraper as wd
 
 # Selenium helpers used for waiting/selecting elements during search-fill
